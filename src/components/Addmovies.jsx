@@ -16,7 +16,7 @@ class Addmoviesbutton extends Component {
         return ( 
             <div>
             <button className='input-button' onClick={this.InputForm}>Add New Movie</button>
-            <Addmoviesform/>
+            <Addmoviesform addMovies={this.props.addMovies}/>
             </div>
          );
     }

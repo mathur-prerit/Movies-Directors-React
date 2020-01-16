@@ -9,27 +9,54 @@ class Movies extends Component {
     movies: []
   };
 
+
   componentDidMount() {
-    fetch("http://localhost:8080/movies")
-      .then(response => response.json())
-      .then(data => {
-        //   console.log(data)
-        data.map(item => {
-        //   console.log(item);
-          this.setState({ movies: [...this.state.movies, item] });
-          return item;
-        });
-        // this.setState({movies:[{})
-        //   this.setState({ movies:[...this.state.movies,{}] })
+    this.getAllMovies()
+  }
+
+  getAllMovies=()=>{
+    const url="http://localhost:8080/movies"
+    return fetch(url,{
+      method:'GET'
+    })
+    .then(response => response.json())
+    .then(data => {
+      //   console.log(data)
+      data.map(item => {
+      //   console.log(item);
+        this.setState({ movies: [...this.state.movies, item] });
+        return item;
       });
-    //   .then(() => console.log(this.state.movies));
+      // this.setState({movies:[{})
+      //   this.setState({ movies:[...this.state.movies,{}] })
+    });
+  //   .then(() => console.log(this.state.movies));
+  }
+
+  addMovies=(data)=>{
+    // console.log(data)
+    for(let item in data){
+      console.log(data[item])
+    }
+    // let ENAME = theItem;
+    // url = `https://api.trello.com/1/cards/${LID}?name=${ENAME}&key=${API_KEY}&token=${TOKEN}`;
+  
+    // return fetch(url, {
+    //   method: "PUT"
+    // })
+    //   .then(res => {
+    //     if (res.ok) {
+    //       return res.json();
+    //     }
+    //   })
+    //   .then(() => update());
   }
 
   render() {
     return (
       <div>
       <Header/>
-      <Addmoviesbutton/>
+      <Addmoviesbutton addMovies={this.addMovies}/>
       <Movieslist movies={this.state.movies}/>
       </div>
     );
