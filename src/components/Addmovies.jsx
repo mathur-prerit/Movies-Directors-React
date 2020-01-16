@@ -3,13 +3,19 @@ import Addmoviesform from "./Addmoviesform.jsx"
 
 class Addmoviesbutton extends Component {
     // state = {  }
-    Inputform=(e)=>{
-        console.log("working")
+
+
+    InputForm=(e)=>{
+        e.preventDefault();
+        let hide = e.target;
+        hide.style.display = "none";
+        const popup=document.getElementById('popup-layout')
+        popup.style.display='block'
     }
     render() { 
         return ( 
             <div>
-            <button className='input-button' onClick={this.Inputform}>Add New Movie</button>
+            <button className='input-button' onClick={this.InputForm}>Add New Movie</button>
             <Addmoviesform/>
             </div>
          );
