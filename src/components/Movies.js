@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import Header from "./Header.jsx"
+import Addmoviesbutton from './Addmovies.jsx'
+import Movieslist from "./Movieslist.jsx"
+
 
 class Movies extends Component {
   state = {
@@ -13,6 +17,7 @@ class Movies extends Component {
         data.map(item => {
         //   console.log(item);
           this.setState({ movies: [...this.state.movies, item] });
+          return item;
         });
         // this.setState({movies:[{})
         //   this.setState({ movies:[...this.state.movies,{}] })
@@ -23,22 +28,9 @@ class Movies extends Component {
   render() {
     return (
       <div>
-        {this.state.movies.map(data => (
-          // console.log(data)
-          <div key={data.id}>
-            <div>{data.name}</div>
-            <div>{data.des}</div>
-            <div>{data.runtime}</div>
-            <div>{data.genre}</div>
-            <div>{data.rating}</div>
-            <div>{data.metascore}</div>
-            <div>{data.votes}</div>
-            <div>{data.gross}</div>
-            <div>{data.director}</div>
-            <div>{data.actor}</div>
-            <div>{data.year}</div>
-          </div>
-        ))}
+      <Header/>
+      <Addmoviesbutton/>
+      <Movieslist movies={this.state.movies}/>
       </div>
     );
   }

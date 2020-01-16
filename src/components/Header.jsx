@@ -1,10 +1,8 @@
-import React, { Component } from "react";
-import { Route } from "react-router-dom";
-import Movies from "./Movies.js";
+import React from "react";
 
 function Header() {
   return (
-    <div>
+    <div className="App">
       <h1>Movies-Directors</h1>
       <div>
         <div>Movies</div>
