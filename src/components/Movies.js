@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+
 import Header from "./Header.jsx"
 import Addmoviesbutton from './Addmovies.jsx'
 import Movieslist from "./Movieslist.jsx"
+
 
 
 class Movies extends Component {
@@ -22,25 +24,10 @@ class Movies extends Component {
     .then(res => res.json())
     .then(data => {
       this.setState({movies:data})
-      //   console.log(data)
-      // data.map(item => {
-      //   console.log(item);
-        // this.setState({ movies: [...this.state.movies, item] });
-        // return item;
-      // });
-      // this.setState({movies:[{})
-      //   this.setState({ movies:[...this.state.movies,{}] })
     });
-  //   .then(() => console.log(this.state.movies));
   }
 
   addMovies=(data)=>{
-    // const y=JSON.stringify(data)
-    // console.log(data)
-    // console.log(data)
-    // for(let item in data){
-    //   console.log(data[item])
-    // }
    const url="http://localhost:8080/movies";
     return fetch(url, {
       method: "POST",
@@ -79,7 +66,7 @@ class Movies extends Component {
       <div>
       <Header/>
       <Addmoviesbutton addMovies={this.addMovies}/>
-      <Movieslist movies={this.state.movies} deleteMovie={this.deleteMovie}/>
+      <Movieslist movies={this.state.movies} deleteMovie={this.deleteMovie} getMovieById={this.getMovieById}/>
       </div>
     );
   }

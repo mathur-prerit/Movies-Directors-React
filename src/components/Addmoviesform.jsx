@@ -16,15 +16,15 @@ class Addmoviesform extends Component {
     const name = e.target[0].value;
     const des = e.target[1].value;
     const runtime = e.target[2].value;
-    const genre = e.target[3].value;
-    const rating = e.target[4].value;
-    const metascore = e.target[5].value;
-    const votes = e.target[6].value;
-    const gross = e.target[7].value;
-    const director = e.target[8].value;
-    const actor = e.target[9].value;
-    const year = e.target[10].value;
-
+    const year = e.target[3].value;
+    const genre = e.target[4].value;
+    const rating = e.target[5].value;
+    const metascore = e.target[6].value;
+    const votes = e.target[7].value;
+    const gross = e.target[8].value;
+    const director = e.target[9].value;
+    const actor = e.target[10].value;
+    
     const inputData = {
       name: name,
       des: des,
@@ -39,10 +39,9 @@ class Addmoviesform extends Component {
       year: year
     };
 
-    console.log(inputData)
-
+    // console.log(inputData)
     this.props.addMovies(inputData);
-    // e.target.reset();
+    e.target.reset();
   };
 
   render() {

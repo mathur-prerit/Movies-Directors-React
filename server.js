@@ -39,7 +39,7 @@ app.use(express.json());
 
 // //  movies route
 app.get("/movies", allMovies);
-// app.get('/movies/:movieid', movieByID);
+app.get('/movies/:movieid', movieByID);
 app.delete('/movies/:movieid', deleteMovie);
 app.post('/movies/', addMovie);
 // app.put('/api/movies/:movieid', updateMovie);

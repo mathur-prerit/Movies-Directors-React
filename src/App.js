@@ -5,8 +5,10 @@ import "./App.css";
 import Home from "./components/Home.js";
 import Movies from "./components/Movies.js";
 import Directors from "./components/Directors.js";
+import Moviebyid from './components/Moviebyid.jsx'
 
 function App() {
+  
   return (
     <div>
       <BrowserRouter>
@@ -15,6 +17,7 @@ function App() {
           <Route path="/" component={Home} exact />
           <Route path="/movies" component={Movies} exact/>
           <Route path="/directors" component={Directors} exact/>
+          <Route path="/movies/:id" component={Moviebyid} exact/>
           <Route component={Error}/>
           </Switch>
         </div>

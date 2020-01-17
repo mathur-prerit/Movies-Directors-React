@@ -46,7 +46,7 @@ const movieByID = (req, res) => {
     console.log({ message: "Incorrect parameter passed" });
   } else {
     console.log("Prarameter validated");
-    Movies.findOne({ where: { id: req.params.movieid } })
+    getmoviesByID(req.params.movieid)
       .then(results => {
         if (results !== null) {
           res.send(results);

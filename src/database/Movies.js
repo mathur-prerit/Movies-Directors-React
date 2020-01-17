@@ -29,7 +29,7 @@ const getAllMovies = () => {
 // Getting movies by id
 const getmoviesByID = (movieid) => {
   return new Promise ((resolve, reject) => {
-    connection.query(`select * from movies_stats where rank=${movieid}`, (error, results) => {
+    connection.query(`select * from movies where id=${movieid}`, (error, results) => {
       if (error) {
         return reject(error);
       }
