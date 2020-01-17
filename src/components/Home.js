@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import Header from './Header.jsx'
-
+import { Link } from "react-router-dom";
 
 class Home extends Component {
-    state = {  }
-    render() { 
-        return ( 
-            <div>
-            <h1>Directors</h1>
-            <h1>Movies</h1>
-            </div>
-         );
-    }
+  state = {};
+  render() {
+    return (
+      <div>
+        <Link to="/movies/">Movies</Link>
+        <Link to="/directors/">Directors</Link>
+      </div>
+    );
+  }
 }
- 
+
 export default Home;

@@ -55,6 +55,7 @@ class Movies extends Component {
           return res.json();
         }
       })
+      .then(data => alert('Movies added at:'+data))
       .then(() => this.getAllMovies());
   }
 

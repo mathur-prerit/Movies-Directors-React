@@ -5,24 +5,25 @@ class Addmoviesform extends Component {
   closePopup = e => {
     // e.preventDefault();
     // console.log(e.target.parentNode.style)
-    // const hide=document.getElementById('popup-layout')
+    // const hide=e.target
     e.target.parentNode.parentNode.style.display = "none";
+    e.target.parentNode.parentNode.parentNode.childNodes[0].style.display="block";
   };
 
   SubmitDetails = e => {
     e.preventDefault();
-    const name = document.getElementById("input-name").value;
-    const des = document.getElementById("input-des").value;
-    const runtime = document.getElementById("input-runtime").value;
-    const genre = document.getElementById("input-genre").value;
-    const rating = document.getElementById("input-rating").value;
-    const metascore = document.getElementById("input-metascore").value;
-    const votes = document.getElementById("input-votes").value;
-    const gross = document.getElementById("input-gross").value;
-    const director = document.getElementById("input-director").value;
-    const actor = document.getElementById("input-cast").value;
-    const year = document.getElementById("input-year").value;
 
+    const name = e.target[0].value;
+    const des = e.target[1].value;
+    const runtime = e.target[2].value;
+    const genre = e.target[3].value;
+    const rating = e.target[4].value;
+    const metascore = e.target[5].value;
+    const votes = e.target[6].value;
+    const gross = e.target[7].value;
+    const director = e.target[8].value;
+    const actor = e.target[9].value;
+    const year = e.target[10].value;
 
     const inputData = {
       name: name,
@@ -38,8 +39,10 @@ class Addmoviesform extends Component {
       year: year
     };
 
+    console.log(inputData)
+
     this.props.addMovies(inputData);
-    e.target.reset();
+    // e.target.reset();
   };
 
   render() {
@@ -71,16 +74,17 @@ class Addmoviesform extends Component {
                 id="input-des"
                 type="text"
                 placeholder="Movie Description"
+                required
               />
             </div>
             <div>
               <div>
                 <label>Runtime</label>
-                <input id="input-runtime" type="number" placeholder="Minutes" />
+                <input id="input-runtime" type="number" placeholder="Minutes" required />
               </div>
               <div>
                 <label>Year</label>
-                <input id="input-year" type="number" placeholder="YYYY" />
+                <input id="input-year" type="number" placeholder="YYYY" required />
               </div>
               <div>
                 <select id="input-genre" selected="">
@@ -105,6 +109,7 @@ class Addmoviesform extends Component {
                   id="input-rating"
                   type="number"
                   placeholder="Out of 10"
+                  required
                 />
               </div>
               <div>
@@ -113,6 +118,7 @@ class Addmoviesform extends Component {
                   id="input-metascore"
                   type="number"
                   placeholder="Out of 100"
+                  required
                 />
               </div>
             </div>
@@ -123,6 +129,7 @@ class Addmoviesform extends Component {
                   id="input-votes"
                   type="number"
                   placeholder="Total Votes"
+                  required
                 />
               </div>
               <div>
@@ -137,6 +144,7 @@ class Addmoviesform extends Component {
                   id="input-director"
                   type="text"
                   placeholder="Director Name"
+                  required
                 />
               </div>
               <div>
@@ -145,6 +153,7 @@ class Addmoviesform extends Component {
                   id="input-cast"
                   type="text"
                   placeholder="Actor/Actress"
+                  required
                 />
               </div>
             </div>

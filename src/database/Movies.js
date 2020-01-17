@@ -53,7 +53,7 @@ const addNewmovie = (body) => {
     const year= body.year
   return new Promise ((resolve, reject) => {
     //  console.log(`${name}','${des}',${runtime},'${genre}',${rating},${metascore},${votes},${gross},'${director}','${actor}',${year} `);
-    connection.query(`insert into movies(name,des,runtime,genre,rating,metascore,votes,gross,director,actor,year) values('${name}',${des},${runtime},${genre},${rating},${metascore},${votes},${gross},${director},${actor},${year} )`);
+    connection.query(`insert into movies(name,des,runtime,genre,rating,metascore,votes,gross,director,actor,year) values('${name}','${des}',${runtime},'${genre}',${rating},${metascore},${votes},${gross},'${director}','${actor}',${year} )`);
     connection.query('select max(id) as id from movies', (error, results) => {
       if (error) {
         return reject(error);

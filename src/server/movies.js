@@ -93,12 +93,11 @@ const addMovie = (req, res) => {
   // console.log(JSON.parse(body))
 
 
-  for(let item in body){
-    if(!body[item].length){
-      body[item]=null;
-    }
+  // for(let item in body){
+  //   if(!body[item].length){
+  //     body[item]=null;
+  //   }
     // console.log(typeof body[item])
-  }
 
   // const dir = {
   //   name: body.name,
@@ -119,8 +118,8 @@ const addMovie = (req, res) => {
       if (Object.values(results).length === 0) {
         res.send(400);
       } else {
-        //  console.log(JSON.stringify(results));
-        res.send(`New Movie id is: ${results.id}`);
+        //  const id=JSON.stringify(results[0].id);
+        res.send(JSON.stringify(results[0].id));
       }
     })
     .catch(error => {

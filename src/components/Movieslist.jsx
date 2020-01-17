@@ -4,9 +4,15 @@ class Movieslist extends Component {
   deleteMovies = e => {
     e.preventDefault();
     // console.log(e.target.parentNode.parentNode.id);
-    const id=e.target.parentNode.parentNode.id
-    this.props.deleteMovie(id)
+    const id = e.target.parentNode.parentNode.id;
+    this.props.deleteMovie(id);
   };
+
+  movieByID=(e)=>{
+    e.preventDefault();
+    const id=e.target.parentNode.parentNode.id
+    console.log(id)
+  }
 
   state = {};
   render() {
@@ -14,8 +20,8 @@ class Movieslist extends Component {
       <div className="movies-containers">
         {this.props.movies.map(data => (
           <div key={data.id} className="movies-cards" id={data.id}>
-            <div style={{ textAlign: "center", fontSize: 24 }}>
-              <b>{data.name}</b>
+            <div style={{ textAlign: "center", fontSize: 24 }} onClick={this.movieByID}>
+        <b>{data.name}</b>
             </div>
             <div>
               <b>Description: </b>
