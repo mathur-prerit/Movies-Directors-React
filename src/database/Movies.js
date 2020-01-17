@@ -39,11 +39,22 @@ const getmoviesByID = (movieid) => {
 };
 
 // Inserting a new movie
-const addNewmovie = (mName, desc, runtime, genre, rating, metascore, votes, gross, director, actor, year) => {
+const addNewmovie = (body) => {
+    const name= body.name
+    const des= body.des
+    const runtime= body.runtime
+    const genre= body.genre
+    const rating= body.rating
+    const metascore= body.metascore
+    const votes= body.votes
+    const gross= body.gross
+    const director= body.director
+    const actor= body.actor
+    const year= body.year
   return new Promise ((resolve, reject) => {
-    //  console.log(`${mName}','${desc}',${runtime},'${genre}',${rating},${metascore},${votes},${gross},'${director}','${actor}',${year} `);
-    connection.query(`insert into movies_stats(title,description,runtime,genre,rating,metascore,votes,gross,director,actor,year) values('${mName}','${desc}',${runtime},'${genre}',${rating},${metascore},${votes},${gross},'${director}','${actor}',${year} )`);
-    connection.query('select max(rank) as rank from movies_stats', (error, results) => {
+    //  console.log(`${name}','${des}',${runtime},'${genre}',${rating},${metascore},${votes},${gross},'${director}','${actor}',${year} `);
+    connection.query(`insert into movies(name,des,runtime,genre,rating,metascore,votes,gross,director,actor,year) values('${name}',${des},${runtime},${genre},${rating},${metascore},${votes},${gross},${director},${actor},${year} )`);
+    connection.query('select max(id) as id from movies', (error, results) => {
       if (error) {
         return reject(error);
       }
@@ -66,8 +77,9 @@ const updatemovie = (id, mName, desc, runtime, genre, rating, metascore, votes, 
 
 // Deleting movie by movie id
 const deletemovie = (id) => {
+// console.log(id)
   return new Promise ((resolve, reject) => {
-    connection.query(`delete from movies_stats where rank=${id}`, (error, results) => {
+    connection.query(`delete from movies where id=${id.id}`, (error, results) => {
       if (error) {
         return reject(error);
       }

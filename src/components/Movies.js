@@ -19,14 +19,15 @@ class Movies extends Component {
     return fetch(url,{
       method:'GET'
     })
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
+      this.setState({movies:data})
       //   console.log(data)
-      data.map(item => {
+      // data.map(item => {
       //   console.log(item);
-        this.setState({ movies: [...this.state.movies, item] });
-        return item;
-      });
+        // this.setState({ movies: [...this.state.movies, item] });
+        // return item;
+      // });
       // this.setState({movies:[{})
       //   this.setState({ movies:[...this.state.movies,{}] })
     });
@@ -34,22 +35,42 @@ class Movies extends Component {
   }
 
   addMovies=(data)=>{
+    // const y=JSON.stringify(data)
     // console.log(data)
-    for(let item in data){
-      console.log(data[item])
-    }
-    // let ENAME = theItem;
-    // url = `https://api.trello.com/1/cards/${LID}?name=${ENAME}&key=${API_KEY}&token=${TOKEN}`;
-  
-    // return fetch(url, {
-    //   method: "PUT"
-    // })
-    //   .then(res => {
-    //     if (res.ok) {
-    //       return res.json();
-    //     }
-    //   })
-    //   .then(() => update());
+    // console.log(data)
+    // for(let item in data){
+    //   console.log(data[item])
+    // }
+   const url="http://localhost:8080/movies";
+    return fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then(() => this.getAllMovies());
+  }
+
+  deleteMovie=(id)=>{
+    const url="http://localhost:8080/movies/"+id;
+    return fetch(url, {
+      method: "DELETE",
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then(()=>alert('Item deleted at:'+id))
+      .then(() => this.getAllMovies());
+    
   }
 
   render() {
@@ -57,7 +78,7 @@ class Movies extends Component {
       <div>
       <Header/>
       <Addmoviesbutton addMovies={this.addMovies}/>
-      <Movieslist movies={this.state.movies}/>
+      <Movieslist movies={this.state.movies} deleteMovie={this.deleteMovie}/>
       </div>
     );
   }

@@ -13,15 +13,15 @@ class Addmoviesform extends Component {
     e.preventDefault();
     const name = document.getElementById("input-name").value;
     const des = document.getElementById("input-des").value;
-    const runtime = parseInt(document.getElementById("input-runtime").value);
+    const runtime = document.getElementById("input-runtime").value;
     const genre = document.getElementById("input-genre").value;
-    const rating = parseFloat(document.getElementById("input-rating").value);
-    const metascore = parseInt(document.getElementById("input-metascore").value);
-    const votes = parseInt(document.getElementById("input-votes").value);
-    const gross = parseFloat(document.getElementById("input-gross").value);
+    const rating = document.getElementById("input-rating").value;
+    const metascore = document.getElementById("input-metascore").value;
+    const votes = document.getElementById("input-votes").value;
+    const gross = document.getElementById("input-gross").value;
     const director = document.getElementById("input-director").value;
-    const cast = document.getElementById("input-cast").value;
-    const year = parseInt(document.getElementById("input-year").value);
+    const actor = document.getElementById("input-cast").value;
+    const year = document.getElementById("input-year").value;
 
 
     const inputData = {
@@ -34,16 +34,9 @@ class Addmoviesform extends Component {
       votes: votes,
       gross: gross,
       director: director,
-      cast: cast,
+      actor: actor,
       year: year
     };
-
-    for(let item in inputData){
-      if(!inputData[item].length){
-        inputData[item]=null;
-      }
-      // console.log(inputData[item])
-    }
 
     this.props.addMovies(inputData);
     e.target.reset();

@@ -11,7 +11,6 @@ const {
   addMovie,
   updateMovie
 } = require("./src/server/movies.js");
-// import {allMovies} from './server/movies.js'
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -41,8 +40,8 @@ app.use(express.json());
 // //  movies route
 app.get("/movies", allMovies);
 // app.get('/movies/:movieid', movieByID);
-// app.delete('/movies/:movieid', deleteMovie);
-// app.post('/api/movies/', addMovie);
+app.delete('/movies/:movieid', deleteMovie);
+app.post('/movies/', addMovie);
 // app.put('/api/movies/:movieid', updateMovie);
 
 // // Error URL
