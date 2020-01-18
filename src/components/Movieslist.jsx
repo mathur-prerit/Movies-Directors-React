@@ -1,10 +1,18 @@
 import React, { Component } from "react";
 import Editmoviesform from "./Editmoviesform.jsx";
+import {withRouter} from 'react-router-dom'
 
 class Movieslist extends Component {
   state = {
     movie: []
   };
+
+  oneMovie=(e)=>{
+    const id=e.target.parentNode.parentNode.id
+    this.props.history.push('/movies/'+id)
+    // console.log(id)
+
+  }
 
   deleteMovies = e => {
     e.preventDefault();
@@ -44,7 +52,7 @@ class Movieslist extends Component {
           <div key={data.id} className="movies-cards" id={data.id}>
             <div
               style={{ textAlign: "center", fontSize: 24 }}
-              onClick={this.movieByID}
+              onClick={this.oneMovie}
             >
               <b>{data.name}</b>
             </div>
@@ -102,4 +110,4 @@ class Movieslist extends Component {
   }
 }
 
-export default Movieslist;
+export default withRouter(Movieslist);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Header from './Header.jsx'
+import Header from './Header.jsx'
 
 
 class Directors extends Component {
@@ -7,6 +7,7 @@ class Directors extends Component {
     render() { 
         return ( 
             <div>
+                <Header/>
             <h1>At directors page</h1>
             </div>
          );

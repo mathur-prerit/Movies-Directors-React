@@ -61,7 +61,6 @@ class Movies extends Component {
   }
 
   editMovie=(id,data)=>{
-    // console.log(id,data)
     const url="http://localhost:8080/movies/"+id;
     return fetch(url, {
       method: "PUT",
@@ -71,13 +70,6 @@ class Movies extends Component {
     },
     body: JSON.stringify(data)
     })
-      // .then(res => {
-      //   if (res.ok) {
-      //     return res.json();
-      //   }
-      // })
-      // .then(()=>alert('Movie edited at:'+id))
-      .then(() => this.getAllMovies());
   }
 
 
