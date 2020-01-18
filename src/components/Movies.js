@@ -56,17 +56,37 @@ class Movies extends Component {
           return res.json();
         }
       })
-      .then(()=>alert('Item deleted at:'+id))
+      .then(()=>alert('Movie deleted at:'+id))
       .then(() => this.getAllMovies());
-    
   }
+
+  editMovie=(id,data)=>{
+    // console.log(id,data)
+    const url="http://localhost:8080/movies/"+id;
+    return fetch(url, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+    })
+      // .then(res => {
+      //   if (res.ok) {
+      //     return res.json();
+      //   }
+      // })
+      // .then(()=>alert('Movie edited at:'+id))
+      .then(() => this.getAllMovies());
+  }
+
 
   render() {
     return (
       <div>
       <Header/>
       <Addmoviesbutton addMovies={this.addMovies}/>
-      <Movieslist movies={this.state.movies} deleteMovie={this.deleteMovie} getMovieById={this.getMovieById}/>
+      <Movieslist movies={this.state.movies} deleteMovie={this.deleteMovie} editMovie={this.editMovie}/>
       </div>
     );
   }

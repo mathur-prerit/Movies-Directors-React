@@ -21,12 +21,7 @@ const {
 const allMovies = (req, res) => {
   getAllMovies()
     .then(results => {
-      /* results.forEach((row) => {
-          response.write(`${row.id} ${row.d_name}\n`);
-        });
-        response.end(); */
       if (Object.values(results).length !== 0) {
-        // console.log(results)
         res.send(results);
       } else {
         res.sendStatus(204);
@@ -63,7 +58,7 @@ const movieByID = (req, res) => {
 
 // Deleting Movie by id
 const deleteMovie = (req, res) => {
-  console.log(req.params.movieid)
+  // console.log(req.params.movieid)
   if (Number.isInteger(parseInt(req.params.movieid)) === false) {
     console.log("number not provided");
     res.sendStatus(412);
@@ -89,30 +84,6 @@ const deleteMovie = (req, res) => {
 // Adding a new Movie
 const addMovie = (req, res) => {
   let { body } = req;
-  // console.log(body)
-  // console.log(JSON.parse(body))
-
-
-  // for(let item in body){
-  //   if(!body[item].length){
-  //     body[item]=null;
-  //   }
-    // console.log(typeof body[item])
-
-  // const dir = {
-  //   name: body.name,
-  //   des: body.des,
-  //   runtime: body.runtime,
-  //   genre: body.genre,
-  //   rating: body.rating,
-  //   metascore: body.metascore,
-  //   votes: body.votes,
-  //   gross: body.gross,
-  //   director: body.director,
-  //   actor: body.actor,
-  //   year: body.year
-  // };
-  // console.log(dir)
   addNewmovie(body)
     .then(results => {
       if (Object.values(results).length === 0) {
@@ -136,45 +107,12 @@ const updateMovie = (req, res) => {
     console.log({ message: "Incorrect parameter passed" });
   } else {
     console.log("Prarameter validated");
-    const body = req.body;
-    const dir = {
-      rank: body.rank,
-      name: body.name,
-      des: body.des,
-      runtime: body.runtime,
-      genre: body.genre,
-      rating: body.rating,
-      metascore: body.metascore,
-      votes: body.votes,
-      gross: body.gross,
-      director: body.director,
-      actor: body.actor,
-      year: body.year
-    };
-    Movies.update(
-      {
-        rank: dir.rank,
-        name: dir.name,
-        des: dir.des,
-        runtime: dir.runtime,
-        genre: dir.genre,
-        rating: dir.rating,
-        metascore: dir.metascore,
-        votes: dir.votes,
-        gross: dir.gross,
-        director: dir.director,
-        actor: dir.actor,
-        year: dir.year
-      },
-      { where: { id: req.params.movieid } }
-    )
-      .then(results => {
-        console.log(JSON.stringify(results[0]));
-        if (results[0] === 0) {
-          res.sendStatus(403);
-        } else {
+    const {body} = req;
+    updatemovie({ id: req.params.movieid },body)
+      .then(() => {
+        // console.log(results)
+        // console.log(JSON.stringify(results[0]));
           res.sendStatus(202);
-        }
       })
       .catch(error => {
         console.log({ message: `${error} in updating movie by id` });

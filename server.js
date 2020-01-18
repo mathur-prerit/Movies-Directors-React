@@ -42,7 +42,7 @@ app.get("/movies", allMovies);
 app.get('/movies/:movieid', movieByID);
 app.delete('/movies/:movieid', deleteMovie);
 app.post('/movies/', addMovie);
-// app.put('/api/movies/:movieid', updateMovie);
+app.put('/movies/:movieid', updateMovie);
 
 // // Error URL
 // app.get('*', (req, res) => res.status(200).send('You ended up on wrong URL'));

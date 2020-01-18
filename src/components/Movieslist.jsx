@@ -1,28 +1,42 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import Editmoviesform from "./Editmoviesform.jsx";
 
 class Movieslist extends Component {
+  state = {
+    movie: []
+  };
 
   deleteMovies = e => {
     e.preventDefault();
-    // console.log(e.target.parentNode.parentNode.id);
     const id = e.target.parentNode.parentNode.id;
     this.props.deleteMovie(id);
   };
 
-  editMovieForm=(e)=>{
-    console.log('hgf')
-  }
-
-  movieByID = e => {
+  editMovieForm = e => {
     e.preventDefault();
     const id = e.target.parentNode.parentNode.id;
-    // console.log(id);
-    this.props.getMovieById(id)
-    // <Link to="/directors/">Directors</Link>
+    const popup = document.getElementById("edit-popup-layout");
+    popup.style.display = "block";
+    // await this.setState({ids:id})
+    this.getMovieById(id);
   };
 
-  state = {};
+  getMovieById = id => {
+    // const { id } = this.props.match.params
+    const url = "http://localhost:8080/movies/" + id;
+    return fetch(url, {
+      method: "GET"
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then(data => {
+        this.setState({ movie: data[0] });
+      });
+  };
+
   render() {
     return (
       <div className="movies-containers">
@@ -79,6 +93,10 @@ class Movieslist extends Component {
             </div>
           </div>
         ))}
+        <Editmoviesform
+          movie={this.state.movie}
+          editMovie={this.props.editMovie}
+        />
       </div>
     );
   }

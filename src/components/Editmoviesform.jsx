@@ -1,19 +1,13 @@
 import React, { Component } from "react";
-class Addmoviesform extends Component {
-  state = {};
 
-  closePopup = e => {
-    // e.preventDefault();
-    // console.log(e.target.parentNode.style)
-    // const hide=e.target
+class Editmoviesform extends Component {
+  closeEditPopup = e => {
     e.target.parentNode.parentNode.style.display = "none";
-    e.target.parentNode.parentNode.parentNode.childNodes[0].style.display =
-      "block";
+    // e.target.parentNode.parentNode.parentNode.childNodes[0].style.display="block";
   };
 
-  SubmitDetails = e => {
+  submitEditForm = e => {
     e.preventDefault();
-
     const name = e.target[0].value;
     const des = e.target[1].value;
     const runtime = e.target[2].value;
@@ -26,7 +20,7 @@ class Addmoviesform extends Component {
     const director = e.target[9].value;
     const actor = e.target[10].value;
 
-    const inputData = {
+    const editedData = {
       name: name,
       des: des,
       runtime: runtime,
@@ -40,31 +34,54 @@ class Addmoviesform extends Component {
       year: year
     };
 
-    // console.log(inputData)
-    this.props.addMovies(inputData);
-    e.target.reset();
+    const{id}=this.props.movie;
+
+    // console.log(editedData);
+    this.props.editMovie(id,editedData);
+    alert('Movie edited at:'+id)
+    // e.target.reset();
   };
 
   render() {
-    const popupStyle = {
+    const {
+      name,
+      des,
+      runtime,
+      rating,
+      metascore,
+      votes,
+      gross,
+      director,
+      actor,
+      year
+    } = this.props.movie;
+
+    const editPopupStyle = {
       display: "none"
     };
 
     return (
-      <div className="popup-form" id="popup-layout" style={popupStyle}>
-        <div className="popup-content">
-          <button className="close-popup-button" onClick={this.closePopup}>
+      <div
+        className="edit-popup-form"
+        id="edit-popup-layout"
+        style={editPopupStyle}
+      >
+        <div className="edit-popup-content">
+          <button
+            className="close-edit-popup-button"
+            onClick={this.closeEditPopup}
+          >
             x
           </button>
-          <h1>Input Movie Details</h1>
-
-          <form onSubmit={this.SubmitDetails}>
+          <h1>Edit Movie Details</h1>
+          <form onSubmit={this.submitEditForm}>
             <div>
               <label>Name</label>
               <input
                 id="input-name"
                 type="text"
-                placeholder="Movie Name"
+                defaultValue={name}
+                placeholder="Movie name"
                 required
               />
             </div>
@@ -73,6 +90,7 @@ class Addmoviesform extends Component {
               <input
                 id="input-des"
                 type="text"
+                defaultValue={des}
                 placeholder="Movie Description"
                 required
               />
@@ -83,6 +101,7 @@ class Addmoviesform extends Component {
                 <input
                   id="input-runtime"
                   type="number"
+                  defaultValue={runtime}
                   placeholder="Minutes"
                   required
                 />
@@ -92,6 +111,7 @@ class Addmoviesform extends Component {
                 <input
                   id="input-year"
                   type="number"
+                  defaultValue={year}
                   placeholder="YYYY"
                   required
                 />
@@ -118,6 +138,7 @@ class Addmoviesform extends Component {
                 <input
                   id="input-rating"
                   type="number"
+                  defaultValue={rating}
                   placeholder="Out of 10"
                   required
                 />
@@ -127,6 +148,7 @@ class Addmoviesform extends Component {
                 <input
                   id="input-metascore"
                   type="number"
+                  defaultValue={metascore}
                   placeholder="Out of 100"
                   required
                 />
@@ -138,13 +160,19 @@ class Addmoviesform extends Component {
                 <input
                   id="input-votes"
                   type="number"
+                  defaultValue={votes}
                   placeholder="Total Votes"
                   required
                 />
               </div>
               <div>
                 <label>Gross Earning</label>
-                <input id="input-gross" type="number" placeholder="Million $" />
+                <input
+                  id="input-gross"
+                  type="number"
+                  defaultValue={gross}
+                  placeholder="Million $"
+                />
               </div>
             </div>
             <div>
@@ -153,6 +181,7 @@ class Addmoviesform extends Component {
                 <input
                   id="input-director"
                   type="text"
+                  defaultValue={director}
                   placeholder="Director Name"
                   required
                 />
@@ -162,13 +191,14 @@ class Addmoviesform extends Component {
                 <input
                   id="input-cast"
                   type="text"
+                  defaultValue={actor}
                   placeholder="Actor/Actress"
                   required
                 />
               </div>
             </div>
-            <button type="submit" value="submit">
-              Submit
+            <button type="submit" defaultValue="submit">
+              Submit Changes
             </button>
           </form>
         </div>
@@ -177,4 +207,4 @@ class Addmoviesform extends Component {
   }
 }
 
-export default Addmoviesform;
+export default Editmoviesform;

@@ -64,9 +64,23 @@ const addNewmovie = (body) => {
 };
 
 // Updating movie details by movie id
-const updatemovie = (id, mName, desc, runtime, genre, rating, metascore, votes, gross, director, actor, year) => {
+const updatemovie = (id,body) => {
+  // console.log(id)
+  // console.log(body)
+  const eid=parseInt(id.id);
+  const name= body.name;
+  const des= body.des;
+  const runtime= body.runtime;
+  const genre= body.genre;
+  const rating= body.rating;
+  const metascore= body.metascore;
+  const votes= body.votes;
+  const gross= body.gross;
+  const director= body.director;
+  const actor= body.actor;
+  const year= body.year;
   return new Promise ((resolve, reject) => {
-    connection.query(`update movies_stats set title='${mName}',description='${desc}',runtime=${runtime},genre='${genre}',rating=${rating},metascore=${metascore},votes=${votes},gross=${gross},director='${director}',actor='${actor}',year=${year} where rank=${id}`, (error, results) => {
+    connection.query(`update movies set name='${name}',des='${des}',runtime=${runtime},genre='${genre}',rating=${rating},metascore=${metascore},votes=${votes},gross=${gross},director='${director}',actor='${actor}',year=${year} where id=${eid}`, (error, results) => {
       if (error) {
         return reject(error);
       }
