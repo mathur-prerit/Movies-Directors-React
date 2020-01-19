@@ -51,22 +51,21 @@
   display:flex;
   flex-flow:row wrap;
   height:100%;
-  max-height: 86vh;
+  max-height: 76vh;
   overflow-y:scroll;
 }
 
+/* 
 .popup-form {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  z-index: 1; 
+  padding-top: 100px;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  /* overflow: auto; Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; Enable scroll if needed
+  background-color: rgb(0, 0, 0); 
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .popup-content {
@@ -77,23 +76,23 @@
   border: 1px solid #888;
   width: 80%;
   border-radius: 30px;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
   height: 100%;
   max-height: 62vh;
 }
 
 .edit-popup-form{
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  display: none; Hidden by default
+  position: fixed; 
+  z-index: 1; 
+  padding-top: 100px; 
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  /* overflow: auto; Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; Enable scroll if needed
+  background-color: rgb(0, 0, 0); 
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .edit-popup-content{
@@ -104,7 +103,142 @@
   border: 1px solid #888;
   width: 80%;
   border-radius: 30px;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
   height: 100%;
   max-height: 62vh;
+} */
+
+.edit-form-container{
+  background-color: rgba(255,255,255,0.7);
+  /* background-color:lightcyan ; */
+  margin: auto;
+  padding:1%;
+display:flex;
+flex-direction: column;
+align-items:center; 
+border-radius: 20px;
+border:1px solid black;
+}
+
+.edit-form-items{
+  padding:2%;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 50%;
+  align-items:center;
+}
+
+h2{
+  text-align: center;
+  color: white;
+}
+
+.home-page{
+  overflow: hidden;
+  height:100vh;
+  background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/d1f1a1dc-c017-4189-8fc2-193a3f3699b8/9927403b-6c43-4d43-b2ba-499f96079dcf/IN-en-20200106-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+  background-repeat: no-repeat;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:700,900');
+
+.home-page-btn {
+  position: relative;
+  top:25%;
+  text-align: center;
+  font-family: 'Roboto';
+  font-size: 12vmin;
+  font-weight: 700;
+  animation: netflix_style 3.5s infinite;
+  outline: none;
+  white-space: nowrap;
+}
+
+@keyframes netflix_style {
+  0% {
+    text-shadow: makelongshadow(100,1);
+    color:#f3f3f3;
+    transform: scale(1.5, 1.5);
+  }
+  10% {
+    text-shadow: makelongshadow(100,1.5);
+    color:#f3f3f3;
+    transform: scale(1.5, 1.5);
+  }
+  15% {
+     color:#f3f3f3;
+  }
+  20% {    
+    color:#e90418;
+    text-shadow: none;
+    transform: scale(1.1, 1.1);
+  }
+  75% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;    
+    color:#e90418;
+    transform: scale(0.85, 0.9);
+  }
+  
+  100% {
+    opacity: 0;
+  }
+}
+
+.input-button,.del-btn{
+  text-align: center;
+  position: relative;
+  left: 45%;
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding:0.5%;
+  margin: auto;
+  /* padding:1%; */
+  /* width: fit-content; */
+}
+
+.header-clicks{
+display: flex;
+justify-content: space-evenly;
+/* color:white; */
+/* width: 100%; */
+}
+
+.App{
+color:white;
+padding:0.2%;
+background-color: rgba(255,255,255,0.4);
+/* background: transparent; */
+/* border:2px transparent; */
+}
+
+.master{
+  background-image:url('https://www.myanmore.com/wp-content/uploads/2019/05/netflix-background-9.jpg');
+  overflow-y: hidden;
+}
+
+.add-btn{
+  padding: 1%;
+}
+
+.popup-form{
+  background-image:url('https://www.myanmore.com/wp-content/uploads/2019/05/netflix-background-9.jpg');
+  overflow-y: hidden;
+  height:100vh;
+}
+
+.submit-btn{
+  text-align: center;
+  position: relative;
+  /* left: 45%; */
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding:0.5%;
+  margin: auto;
 }

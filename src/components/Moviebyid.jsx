@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Header from "./Header.jsx";
+import {withRouter} from "react-router-dom";
 
 class Moviebyid extends Component {
   state = {
@@ -9,6 +10,12 @@ class Moviebyid extends Component {
   componentDidMount() {
     this.getMovieById();
   }
+
+  editMovieForm = e => {
+    const id=this.state.movie.id
+    // console.log(id)
+    this.props.history.push("/movies/"+id+"/edit")
+  };
 
   getMovieById = () => {
     const { id } = this.props.match.params;
@@ -26,6 +33,7 @@ class Moviebyid extends Component {
         this.setState({ movie: data[0] });
       });
   };
+
   render() {
     const {
       id,
@@ -41,12 +49,13 @@ class Moviebyid extends Component {
       actor,
       year
     } = this.state.movie;
+
     return (
-      <div>
+      <div class="popup-form">
         <Header />
-        <h1>Movie Details</h1>
-        <div key={id}>
-          <div>{name}</div>
+        <h2>Movie Details</h2>
+        <div key={id} class="edit-form-container">
+          <h3>{name}</h3>
           <div>{des}</div>
           <div>{runtime}</div>
           <div>{genre}</div>
@@ -57,10 +66,11 @@ class Moviebyid extends Component {
           <div>{director}</div>
           <div>{actor}</div>
           <div>{year}</div>
+        <button className="submit-btn" onClick={this.editMovieForm}>Edit</button>
         </div>
       </div>
     );
   }
 }
 
-export default Moviebyid;
+export default withRouter(Moviebyid);

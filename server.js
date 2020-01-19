@@ -41,8 +41,8 @@ app.use(express.json());
 app.get("/movies", allMovies);
 app.get('/movies/:movieid', movieByID);
 app.delete('/movies/:movieid', deleteMovie);
-app.post('/movies/', addMovie);
-app.put('/movies/:movieid', updateMovie);
+app.post('/movies/add', addMovie);
+app.put('/movies/:movieid/edit', updateMovie);
 
 // // Error URL
 // app.get('*', (req, res) => res.status(200).send('You ended up on wrong URL'));

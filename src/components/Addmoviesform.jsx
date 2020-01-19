@@ -1,15 +1,17 @@
 import React, { Component } from "react";
+import Header from "./Header.jsx";
+
 class Addmoviesform extends Component {
   state = {};
 
-  closePopup = e => {
-    // e.preventDefault();
-    // console.log(e.target.parentNode.style)
-    // const hide=e.target
-    e.target.parentNode.parentNode.style.display = "none";
-    e.target.parentNode.parentNode.parentNode.childNodes[0].style.display =
-      "block";
-  };
+  // closePopup = e => {
+  //   // e.preventDefault();
+  //   // console.log(e.target.parentNode.style)
+  //   // const hide=e.target
+  //   e.target.parentNode.parentNode.style.display = "none";
+  //   e.target.parentNode.parentNode.parentNode.childNodes[0].style.display =
+  //     "block";
+  // };
 
   SubmitDetails = e => {
     e.preventDefault();
@@ -41,26 +43,42 @@ class Addmoviesform extends Component {
     };
 
     // console.log(inputData)
-    this.props.addMovies(inputData);
+    this.addMovies(inputData);
     e.target.reset();
   };
 
+  addMovies = data => {
+    const url = "http://localhost:8080/movies/add";
+    return fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then(data => alert("Movies added at:" + data));
+  };
+
   render() {
-    const popupStyle = {
-      display: "none"
-    };
+    // const popupStyle = {
+    //   display: "none"
+    // };
 
     return (
-      <div className="popup-form" id="popup-layout" style={popupStyle}>
+      <div className="popup-form" id="popup-layout">
+        <Header />
         <div className="popup-content">
-          <button className="close-popup-button" onClick={this.closePopup}>
-            x
-          </button>
-          <h1>Input Movie Details</h1>
+          <h2>Input Movie Details</h2>
 
-          <form onSubmit={this.SubmitDetails}>
-            <div>
-              <label>Name</label>
+          <form className="edit-form-container" onSubmit={this.SubmitDetails}>
+            <div style={{ padding: "0.5%" }}>
+              <label>Name: </label>
               <input
                 id="input-name"
                 type="text"
@@ -68,18 +86,19 @@ class Addmoviesform extends Component {
                 required
               />
             </div>
-            <div>
-              <label>Description</label>
+            <div style={{ padding: "0.5%" }}>
+              <label>Description: </label>
               <input
+              style={{ width: "800px", height: "20px" }}
                 id="input-des"
                 type="text"
                 placeholder="Movie Description"
                 required
               />
             </div>
-            <div>
+            <div className="edit-form-items">
               <div>
-                <label>Runtime</label>
+                <label>Runtime: </label>
                 <input
                   id="input-runtime"
                   type="number"
@@ -88,7 +107,7 @@ class Addmoviesform extends Component {
                 />
               </div>
               <div>
-                <label>Year</label>
+                <label>Year: </label>
                 <input
                   id="input-year"
                   type="number"
@@ -97,7 +116,7 @@ class Addmoviesform extends Component {
                 />
               </div>
               <div>
-                <select id="input-genre" selected="">
+                <select id="input-genre" selected="" required>
                   <option value="">Select a Genre</option>
                   <option value="Action">Action</option>
                   <option value="Adventure">Adventure</option>
@@ -112,29 +131,35 @@ class Addmoviesform extends Component {
                 </select>
               </div>
             </div>
-            <div>
+            <div className="edit-form-items">
               <div>
-                <label>Rating</label>
+                <label>Rating: </label>
                 <input
                   id="input-rating"
-                  type="number"
+                  type="range"
+                  min="0"
+                  max="10"
+                  step="0.1"
                   placeholder="Out of 10"
                   required
                 />
               </div>
               <div>
-                <label>Metascore</label>
+                <label>Metascore: </label>
                 <input
                   id="input-metascore"
-                  type="number"
+                  type="range"
+                  min="0"
+                  max="100"
+                  step="1"
                   placeholder="Out of 100"
                   required
                 />
               </div>
             </div>
-            <div>
+            <div className="edit-form-items">
               <div>
-                <label>Votes</label>
+                <label>Votes: </label>
                 <input
                   id="input-votes"
                   type="number"
@@ -143,13 +168,18 @@ class Addmoviesform extends Component {
                 />
               </div>
               <div>
-                <label>Gross Earning</label>
-                <input id="input-gross" type="number" placeholder="Million $" />
+                <label>Gross Earning: </label>
+                <input
+                  id="input-gross"
+                  type="number"
+                  step="0.01"
+                  placeholder="Million $"
+                />
               </div>
             </div>
-            <div>
+            <div className="edit-form-items">
               <div>
-                <label>Director</label>
+                <label>Director: </label>
                 <input
                   id="input-director"
                   type="text"
@@ -158,7 +188,7 @@ class Addmoviesform extends Component {
                 />
               </div>
               <div>
-                <label>Cast</label>
+                <label>Cast: </label>
                 <input
                   id="input-cast"
                   type="text"
@@ -167,7 +197,7 @@ class Addmoviesform extends Component {
                 />
               </div>
             </div>
-            <button type="submit" value="submit">
+            <button className="submit-btn" type="submit" value="submit">
               Submit
             </button>
           </form>

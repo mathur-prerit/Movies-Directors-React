@@ -1,10 +1,15 @@
 import React, { Component } from "react";
+import Header from "./Header.jsx";
+import { withRouter } from "react-router-dom";
 
 class Editmoviesform extends Component {
-  closeEditPopup = e => {
-    e.target.parentNode.parentNode.style.display = "none";
-    // e.target.parentNode.parentNode.parentNode.childNodes[0].style.display="block";
+  state = {
+    movie: []
   };
+
+  componentDidMount() {
+    this.getMovieById();
+  }
 
   submitEditForm = e => {
     e.preventDefault();
@@ -34,12 +39,45 @@ class Editmoviesform extends Component {
       year: year
     };
 
-    const{id}=this.props.movie;
+    const { id } = this.state.movie;
 
     // console.log(editedData);
-    this.props.editMovie(id,editedData);
-    alert('Movie edited at:'+id)
+    // console.log(id)
+    this.editMovie(id, editedData);
+    alert("Movie edited at:" + id);
+    this.props.history.push("/movies/" + id);
+
     // e.target.reset();
+  };
+
+  editMovie = (id, data) => {
+    const url = "http://localhost:8080/movies/" + id + "/edit";
+    return fetch(url, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+  };
+
+  getMovieById = () => {
+    const { id } = this.props.match.params;
+    // console.log(id)
+    const url = "http://localhost:8080/movies/" + id;
+    return fetch(url, {
+      method: "GET"
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then(data => {
+        // console.log(data)
+        this.setState({ movie: data[0] });
+      });
   };
 
   render() {
@@ -54,29 +92,20 @@ class Editmoviesform extends Component {
       director,
       actor,
       year
-    } = this.props.movie;
+    } = this.state.movie;
 
-    const editPopupStyle = {
-      display: "none"
-    };
+    // const editPopupStyle = {
+    //   display: "none"
+    // };
 
     return (
-      <div
-        className="edit-popup-form"
-        id="edit-popup-layout"
-        style={editPopupStyle}
-      >
+      <div className="popup-form" id="edit-popup-layout">
+        <Header />
         <div className="edit-popup-content">
-          <button
-            className="close-edit-popup-button"
-            onClick={this.closeEditPopup}
-          >
-            x
-          </button>
-          <h1>Edit Movie Details</h1>
-          <form onSubmit={this.submitEditForm}>
-            <div>
-              <label>Name</label>
+          <h2>Edit Movie Details</h2>
+          <form className="edit-form-container" onSubmit={this.submitEditForm}>
+            <div style={{ padding: "0.5%" }}>
+              <label>Name: </label>
               <input
                 id="input-name"
                 type="text"
@@ -85,9 +114,10 @@ class Editmoviesform extends Component {
                 required
               />
             </div>
-            <div>
-              <label>Description</label>
+            <div style={{ padding: "0.5%" }}>
+              <label>Description: </label>
               <input
+                style={{ width: "800px", height: "20px" }}
                 id="input-des"
                 type="text"
                 defaultValue={des}
@@ -95,9 +125,9 @@ class Editmoviesform extends Component {
                 required
               />
             </div>
-            <div>
+            <div className="edit-form-items">
               <div>
-                <label>Runtime</label>
+                <label>Runtime: </label>
                 <input
                   id="input-runtime"
                   type="number"
@@ -107,7 +137,7 @@ class Editmoviesform extends Component {
                 />
               </div>
               <div>
-                <label>Year</label>
+                <label>Year: </label>
                 <input
                   id="input-year"
                   type="number"
@@ -117,7 +147,7 @@ class Editmoviesform extends Component {
                 />
               </div>
               <div>
-                <select id="input-genre" selected="">
+                <select id="input-genre" selected="" required>
                   <option value="">Select a Genre</option>
                   <option value="Action">Action</option>
                   <option value="Adventure">Adventure</option>
@@ -132,31 +162,37 @@ class Editmoviesform extends Component {
                 </select>
               </div>
             </div>
-            <div>
+            <div className="edit-form-items">
               <div>
-                <label>Rating</label>
+                <label>Rating: </label>
                 <input
                   id="input-rating"
-                  type="number"
+                  type="range"
+                  min="0"
+                  max="10"
+                  step="0.1"
                   defaultValue={rating}
                   placeholder="Out of 10"
                   required
                 />
               </div>
               <div>
-                <label>Metascore</label>
+                <label>Metascore: </label>
                 <input
                   id="input-metascore"
-                  type="number"
+                  type="range"
+                  min="0"
+                  max="100"
+                  step="1"
                   defaultValue={metascore}
                   placeholder="Out of 100"
                   required
                 />
               </div>
             </div>
-            <div>
+            <div className="edit-form-items">
               <div>
-                <label>Votes</label>
+                <label>Votes: </label>
                 <input
                   id="input-votes"
                   type="number"
@@ -166,18 +202,19 @@ class Editmoviesform extends Component {
                 />
               </div>
               <div>
-                <label>Gross Earning</label>
+                <label>Gross Earning: </label>
                 <input
                   id="input-gross"
                   type="number"
+                  step="0.01"
                   defaultValue={gross}
                   placeholder="Million $"
                 />
               </div>
             </div>
-            <div>
+            <div className="edit-form-items">
               <div>
-                <label>Director</label>
+                <label>Director: </label>
                 <input
                   id="input-director"
                   type="text"
@@ -187,7 +224,7 @@ class Editmoviesform extends Component {
                 />
               </div>
               <div>
-                <label>Cast</label>
+                <label>Cast: </label>
                 <input
                   id="input-cast"
                   type="text"
@@ -197,7 +234,7 @@ class Editmoviesform extends Component {
                 />
               </div>
             </div>
-            <button type="submit" defaultValue="submit">
+            <button className="submit-btn" type="submit" value="submit">
               Submit Changes
             </button>
           </form>
@@ -207,4 +244,4 @@ class Editmoviesform extends Component {
   }
 }
 
-export default Editmoviesform;
+export default withRouter(Editmoviesform);
