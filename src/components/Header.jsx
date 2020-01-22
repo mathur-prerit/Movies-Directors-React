@@ -7,7 +7,7 @@ const Header = withRouter(({ history}) => {
       <h1 onClick={() => {history.push('/')}}>
         Movies-Directors
       </h1>
-      <div class="header-clicks">
+      <div className="header-clicks">
         {/* <Link to="/movies/">Movies</Link> */}
         <h3 onClick={() => {history.push('/movies/')}}>
         Movies

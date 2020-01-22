@@ -1,9 +1,14 @@
 const express = require("express");
 const cors = require("cors");
 
-// const {
-//   allDirectors, directorByID, deleteDirector, addDirector, updateDirector,
-// } = require('./routes/directors');
+const {
+  allDirectors,
+  directorByID,
+  deleteDirector,
+  addDirector,
+  updateDirector
+} = require("./src/server/directors.js");
+
 const {
   allMovies,
   movieByID,
@@ -30,19 +35,19 @@ app.use(express.json());
 // //  Default index
 // app.get('/', (req, res) => res.send('Welcome to home page'));
 
-// //  directors route
-// app.get('/api/directors', allDirectors);
-// app.get('/api/directors/:directorid', directorByID);
-// app.delete('/api/directors/:directorid', deleteDirector);
-// app.post('/api/directors/', addDirector);
-// app.put('/api/directors/:directorid', updateDirector);
+//  directors route
+app.get("/directors", allDirectors);
+app.get("/directors/:directorid", directorByID);
+app.delete("/directors/:directorid", deleteDirector);
+app.post("/directors/add", addDirector);
+app.put("/directors/:directorid/edit", updateDirector);
 
 // //  movies route
 app.get("/movies", allMovies);
-app.get('/movies/:movieid', movieByID);
-app.delete('/movies/:movieid', deleteMovie);
-app.post('/movies/add', addMovie);
-app.put('/movies/:movieid/edit', updateMovie);
+app.get("/movies/:movieid", movieByID);
+app.delete("/movies/:movieid", deleteMovie);
+app.post("/movies/add", addMovie);
+app.put("/movies/:movieid/edit", updateMovie);
 
 // // Error URL
 // app.get('*', (req, res) => res.status(200).send('You ended up on wrong URL'));

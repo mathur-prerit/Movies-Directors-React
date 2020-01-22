@@ -1,4 +1,3 @@
-// import Movies from '../database/Movies.js'
 const {
   getmoviesByID,
   getAllMovies,
@@ -6,16 +5,6 @@ const {
   updatemovie,
   deletemovie
 } = require("../database/Movies.js");
-
-// const mysql = require('mysql');
-
-// Database Connection Part
-// const connection = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'prerit',
-//   password: '123',
-//   database: 'moviesReact',
-// });
 
 //  Get all Movies
 const allMovies = (req, res) => {
@@ -65,7 +54,7 @@ const deleteMovie = (req, res) => {
     console.log({ message: "Incorrect parameter passed" });
   } else {
     console.log("Prarameter validated");
-    deletemovie ({ id: req.params.movieid })
+    deletemovie({ id: req.params.movieid })
       .then(results => {
         console.log(results);
         if (results === 1) {
@@ -107,12 +96,12 @@ const updateMovie = (req, res) => {
     console.log({ message: "Incorrect parameter passed" });
   } else {
     console.log("Prarameter validated");
-    const {body} = req;
-    updatemovie({ id: req.params.movieid },body)
+    const { body } = req;
+    updatemovie({ id: req.params.movieid }, body)
       .then(() => {
         // console.log(results)
         // console.log(JSON.stringify(results[0]));
-          res.sendStatus(202);
+        res.sendStatus(202);
       })
       .catch(error => {
         console.log({ message: `${error} in updating movie by id` });
