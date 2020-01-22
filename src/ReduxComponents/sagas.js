@@ -1,32 +1,35 @@
-import { put, takeLatest, all } from 'redux-saga/effects';
+import { put,takeLatest, all } from "redux-saga/effects";
 
-function* getAllDirectors(){
-    const url = "http://localhost:8080/directors";
+let json;
 
-    const json= yield fetch(url, {
-      method: "GET"
-    })
-      .then(res => res.json());
-      console.log(json)
+function* getAllDirectors() {
+  const url = "http://localhost:8080/directors";
 
+  json = yield fetch(url, {
+    method: "GET"
+  }).then(res => {
+    return res.json();
+  });
+//   console.log(json);
 
-      yield put({ type: 'getting', json: json.dname, });
+  yield put({ type: "gotData", json });
+} 
+
+//   return {
+//     movies: action.json
+//   };
+//   .then(data => {console.log(data)
+//   .then(data => {
+//     return {
+//         type:getAll,
+//         movies:data
+//     }
+//   });
+
+function* actionWatcher() {
+  yield takeLatest("getAll", getAllDirectors);
 }
-    //   .then(data => {console.log(data)
-    //   .then(data => {
-    //     return {
-    //         type:getAll,
-    //         movies:data
-    //     }
-    //   });
 
-    function* actionWatcher() {
-        yield takeLatest('getAll', getAllDirectors)
-   }
-
-
-    export default function* rootSaga(){
-        yield all([
-            actionWatcher(),
-        ])
-    }
+export default function* rootSaga() {
+  yield all([actionWatcher()]);
+}

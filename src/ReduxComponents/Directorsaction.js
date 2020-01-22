@@ -1,9 +1,10 @@
 
 
 export const getAll='getAll';
+export const gotData='gotData'
 
 export const getAllDirectors = () => ({
-  type: getAll,
+  type: 'getAll',
 });
 
 

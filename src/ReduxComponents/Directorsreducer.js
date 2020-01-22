@@ -1,14 +1,15 @@
-import { getAll } from "../ReduxComponents/Directorsaction";
+import { getAll,gotData } from "../ReduxComponents/Directorsaction";
 
 const initialState = {
-  movies: []
+  directors: []
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case getAll: {
+    case 'gotData': {
+        // console.log(action)
       return {
-        movies: action.json
+        directors: action.json
       };
     }
     default:

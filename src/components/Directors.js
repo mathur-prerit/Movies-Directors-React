@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import Header from "./Header.jsx";
+import Adddirectorsbutton from './Adddirectors.jsx'
+import Directorslist from "./Directorslist"
 
 import { connect } from "react-redux";
-import createSagaMiddleware from 'redux-saga'
 
 import {getAllDirectors} from '../ReduxComponents/Directorsaction.js'
 
 class Directors extends Component {
 //   state = {};
 
-  componentDidMount() {
-    // getAllDirectors();
-  }
+  // componentDidMount() {
+  //   getAllDirectors();
+  // }
   
   
   // deleteMovie = id => {
@@ -29,20 +30,22 @@ class Directors extends Component {
   // };
   
   render() {
-    const { movies,getAllDirectors } = this.props;
-    console.log(movies)
+    const { directors,getAllDirectors } = this.props;
+    console.log(directors)
     return (
       <div>
         <Header />
         <button onClick={getAllDirectors}>get data</button>
-      </div>
+        <Adddirectorsbutton/>
+        <Directorslist directors={directors}/>
+        </div>
     );
   }
 }
 
 const mapStateToProps = state => {
     return {
-      movies: state.movies
+      directors: state.directors
     };
   };
 
