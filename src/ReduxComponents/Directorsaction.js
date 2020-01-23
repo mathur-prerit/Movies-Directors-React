@@ -1,9 +1,4 @@
 
-
-// export const getAll='getAll';
-// export const gotData='gotData'
-
-
 export const getAllDirectors = () => ({
   type: 'getAll',
 });
@@ -13,20 +8,18 @@ export const deleteDirector=(id)=>({
   id,
 });
 
+export const getDirectorById=(id)=>({
+  type:'getOne',
+  id,
+});
 
+export const addDirector=(data)=>({
+  type:'addOne',
+  data,
+});
 
-
-// export const getAllDirectors = () => {
-//     const url = "http://localhost:8080/directors";
-//     return fetch(url, {
-//       method: "GET"
-//     })
-//       .then(res => res.json())
-//     //   .then(data => {console.log(data)
-//       .then(data => {
-//         return {
-//             type:getAll,
-//             movies:data
-//         }
-//       });
-//   };
+export const editDirector=(id,data)=>({
+  type:'editOne',
+  id,
+  data,
+})

@@ -28,9 +28,9 @@ function App() {
               <Route exact path="/movies/:id/edit" component={Editmoviesform} />
 
               <Route path="/directors" component={Directors} exact />
-              {/* <Route exact path="/directors/add" component={Adddirectorsform}/>
+              <Route exact path="/directors/add" component={Adddirectorsform}/>
           <Route exact path="/directors/:id" component={Directorbyid} />
-          <Route exact path="/directors/:id/edit" component={Editdirectorsform} /> */}
+          {/* <Route exact path="/directors/:id/edit" component={Editdirectorsform} /> */}
 
               <Route component={Errorlanding} />
             </Switch>

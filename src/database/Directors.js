@@ -39,7 +39,7 @@ const getdirectorsByID = (directorid) => {
 
   // Inserting a new director
 const addNewdirector = (body) => {
-    const dname= body.name
+    const dname= body.dname
   return new Promise ((resolve, reject) => {
     //  console.log(`${name}','${des}',${runtime},'${genre}',${rating},${metascore},${votes},${gross},'${director}','${actor}',${year} `);
     connection.query(`insert into directors(dname) values('${dname}')`);

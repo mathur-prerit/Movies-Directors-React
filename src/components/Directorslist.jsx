@@ -1,27 +1,22 @@
 import React, { Component } from "react";
-import {withRouter} from 'react-router-dom'
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { getAllDirectors,deleteDirector } from "../ReduxComponents/Directorsaction.js";
+import { deleteDirector } from "../ReduxComponents/Directorsaction.js";
 
 class Directorslist extends Component {
-//   state = {
-//     movie: []
-//   };
 
-//   oneMovie=(e)=>{
-//     const id=e.target.parentNode.parentNode.id
-//     this.props.history.push('/directors/'+id)
-//     // console.log(id)
-//   }
+  oneDirector = e => {
+    const id = e.target.parentNode.parentNode.id;
+    this.props.history.push("/directors/" + id);
+  };
 
-
-deleteDirectors = e => {
-  e.preventDefault();
-  const id = parseInt(e.target.parentNode.parentNode.id);
-  this.props.deleteDirector(id);
-  this.props.refresh()
-};
+  deleteDirectors = e => {
+    e.preventDefault();
+    const id = parseInt(e.target.parentNode.parentNode.id);
+    this.props.deleteDirector(id);
+    this.props.refresh();
+  };
 
   render() {
     return (
@@ -30,12 +25,14 @@ deleteDirectors = e => {
           <div key={data.id} className="movies-cards" id={data.id}>
             <div
               style={{ textAlign: "center", fontSize: 24 }}
-            //   onClick={this.oneMovie}
+              onClick={this.oneDirector}
             >
-              <b>{data.dname}</b>  
+              <b>{data.dname}</b>
             </div>
-                        <div>
-              <button className="del-btn" onClick={this.deleteDirectors}>Delete</button>
+            <div>
+              <button className="del-btn" onClick={this.deleteDirectors}>
+                Delete
+              </button>
             </div>
           </div>
         ))}
@@ -51,7 +48,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-   deleteDirector,
+  deleteDirector
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Directorslist));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Directorslist));

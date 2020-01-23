@@ -1,7 +1,8 @@
 import { getAll, gotData } from "../ReduxComponents/Directorsaction";
 
 const initialState = {
-  directors: []
+  directors: [],
+  director:{id:'',dname:''}
 };
 
 export const reducer = (state = initialState, action) => {
@@ -12,7 +13,20 @@ export const reducer = (state = initialState, action) => {
         directors: action.json
       };
     }
-    
+    case "gotOne": {
+      // console.log(action.json[0]);
+      return {
+        director: action.json[0]
+      };
+    }    
+
+    case "addData": {
+      console.log(action);
+      // return {
+      //   director: action.json[0]
+      // };
+    }
+
 
     // case 'del'
     default:

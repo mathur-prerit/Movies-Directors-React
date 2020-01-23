@@ -5,7 +5,7 @@ import Directorslist from "./Directorslist";
 
 import { connect } from "react-redux";
 
-import { getAllDirectors,deleteDirector } from "../ReduxComponents/Directorsaction.js";
+import { getAllDirectors} from "../ReduxComponents/Directorsaction.js";
 
 class Directors extends Component {
   //   state = {};
@@ -16,7 +16,7 @@ class Directors extends Component {
 
 
   render() {
-    const { directors, getAllDirectors } = this.props;
+    const { directors } = this.props;
     // console.log(directors)
     return (
       <div>

@@ -73,6 +73,7 @@ const deleteDirector = (req, res) => {
 // Adding a new director
 const addDirector = (req, res) => {
   let { body } = req;
+  // console.log(body)
   addNewdirector(body)
     .then(results => {
       if (Object.values(results).length === 0) {
