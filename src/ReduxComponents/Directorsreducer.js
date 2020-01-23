@@ -20,12 +20,12 @@ export const reducer = (state = initialState, action) => {
       };
     }    
 
-    case "addData": {
-      console.log(action);
-      // return {
-      //   director: action.json[0]
-      // };
-    }
+    // case "addData": {
+    //   console.log(action);
+    //   // return {
+    //   //   director: action.json[0]
+    //   // };
+    // }
 
 
     // case 'del'

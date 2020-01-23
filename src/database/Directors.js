@@ -54,8 +54,8 @@ const addNewdirector = (body) => {
 
 // Updating director details by director id
 const updatedirector = (id,body) => {
-    const eid=parseInt(id.id);
-    const dname= body.name;
+    const dname= body.dname;
+    const eid=id.id
     return new Promise ((resolve, reject) => {
       connection.query(`update directors set dname='${dname}'where id=${eid}`, (error, results) => {
         if (error) {

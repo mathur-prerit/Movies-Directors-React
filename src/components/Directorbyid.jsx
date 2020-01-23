@@ -12,15 +12,16 @@ class Directorbyid extends Component {
   }
 
     editDirectorForm = e => {
-      const id=e.target.parentNode
-    console.log(id)
-    //   this.props.history.push("/directors/"+id+"/edit")
-    };
-
-  getDirectorData = () => {
+    //   const id=e.target.parentNode.parentNode
     const { id } = this.props.match.params;
     // console.log(id)
-    this.props.getDirectorById(id);
+      this.props.history.push("/directors/"+id+"/edit")
+    };
+
+  getDirectorData = async () => {
+    const { id } = this.props.match.params;
+    // console.log(id)
+    await this.props.getDirectorById(id);
   };
 
   render() {
@@ -34,7 +35,7 @@ class Directorbyid extends Component {
         <h2>Movie Details</h2>
         <div key={id} className="edit-form-container">
           <h3>{dname}</h3>
-        <button className="submit-btn" onClick={this.editMovieForm}>
+        <button className="submit-btn" onClick={this.editDirectorForm}>
           Edit
         </button>
         </div>

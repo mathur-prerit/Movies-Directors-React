@@ -91,6 +91,7 @@ const addDirector = (req, res) => {
 
 // Updating a new director
 const updateDirector = (req, res) => {
+  // console.log(req.params.directorid)
   if (Number.isInteger(parseInt(req.params.directorid)) === false) {
     console.log("number not provided");
     res.sendStatus(412);
@@ -98,6 +99,7 @@ const updateDirector = (req, res) => {
   } else {
     console.log("Prarameter validated");
     const { body } = req;
+    // console.log(body)
     updatedirector({ id: req.params.directorid }, body)
       .then(() => {
         // console.log(results)

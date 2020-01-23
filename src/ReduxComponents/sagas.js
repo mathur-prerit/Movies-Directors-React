@@ -85,6 +85,26 @@ function* actionWatcher4() {
   yield takeLatest("addOne", addDirector);
 }
 
+function* editDirector(data) {
+  // console.log(data.id)
+  // console.log(data.data)
+  const url = "http://localhost:8080/directors/" + data.id + "/edit";
+  
+  const json=yield fetch(url, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data.data)
+  });
+};
+
+function* actionWatcher5() {
+  yield takeLatest("editOne", editDirector);
+}
+
+
 
 export default function* rootSaga() {
   yield all([
@@ -92,5 +112,6 @@ export default function* rootSaga() {
     fork(actionWatcher2),
     fork(actionWatcher3),
     fork(actionWatcher4),
+    fork(actionWatcher5)
   ]);
 }
