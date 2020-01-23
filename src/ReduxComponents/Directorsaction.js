@@ -1,11 +1,19 @@
 
 
-export const getAll='getAll';
-export const gotData='gotData'
+// export const getAll='getAll';
+// export const gotData='gotData'
+
 
 export const getAllDirectors = () => ({
   type: 'getAll',
 });
+
+export const deleteDirector=(id)=>({
+  type:'delOne',
+  id,
+});
+
+
 
 
 // export const getAllDirectors = () => {

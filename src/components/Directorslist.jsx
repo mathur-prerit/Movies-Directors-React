@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import {withRouter} from 'react-router-dom'
+import { connect } from "react-redux";
+
+import { getAllDirectors,deleteDirector } from "../ReduxComponents/Directorsaction.js";
 
 class Directorslist extends Component {
 //   state = {
@@ -12,11 +15,16 @@ class Directorslist extends Component {
 //     // console.log(id)
 //   }
 
-  deleteDirectors = e => {
-    e.preventDefault();
-    const id = e.target.parentNode.parentNode.id;
-    // this.props.deleteMovie(id);
-  };
+
+deleteDirectors = e => {
+  e.preventDefault();
+  const id = parseInt(e.target.parentNode.parentNode.id);
+  // console.log('here')
+  this.props.deleteDirector(id);
+};
+
+
+
 
   render() {
     return (
@@ -39,4 +47,14 @@ class Directorslist extends Component {
   }
 }
 
-export default withRouter(Directorslist);
+const mapStateToProps = state => {
+  return {
+    directors: state.directors
+  };
+};
+
+const mapDispatchToProps = {
+   deleteDirector,
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Directorslist));

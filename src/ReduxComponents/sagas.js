@@ -1,11 +1,10 @@
-import { put,takeLatest, all } from "redux-saga/effects";
+import { put,takeLatest, all,fork } from "redux-saga/effects";
 
-let json;
 
 function* getAllDirectors() {
   const url = "http://localhost:8080/directors";
 
-  json = yield fetch(url, {
+  const json = yield fetch(url, {
     method: "GET"
   }).then(res => {
     return res.json();
@@ -15,21 +14,36 @@ function* getAllDirectors() {
   yield put({ type: "gotData", json });
 } 
 
-//   return {
-//     movies: action.json
-//   };
-//   .then(data => {console.log(data)
-//   .then(data => {
-//     return {
-//         type:getAll,
-//         movies:data
-//     }
-//   });
 
 function* actionWatcher() {
   yield takeLatest("getAll", getAllDirectors);
 }
+ 
+
+function* deleteDirector(data){
+  console.log(data.id)
+  const url = "http://localhost:8080/directors/" + data.id;
+
+  const json=yield fetch(url, {
+    method: "DELETE"
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    }
+  })
+  .then(() => alert("Movie deleted at:" + data.id))
+  // .then(() => actionWatcher());
+  yield put({type:'delData'})
+};
+
+function* actionWatcher2() {
+  yield takeLatest("delOne", deleteDirector);
+}
 
 export default function* rootSaga() {
-  yield all([actionWatcher()]);
+  yield all([
+    fork(actionWatcher),
+    fork(actionWatcher2),
+  ]);
 }

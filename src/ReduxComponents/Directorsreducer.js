@@ -1,4 +1,4 @@
-import { getAll,gotData } from "../ReduxComponents/Directorsaction";
+import { getAll, gotData } from "../ReduxComponents/Directorsaction";
 
 const initialState = {
   directors: []
@@ -6,12 +6,20 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'gotData': {
-        // console.log(action)
+    case "gotData": {
+      // console.log(action);
       return {
         directors: action.json
       };
     }
+
+    case "delData": {
+      // return {
+      //   directors: action.json
+      // };
+    }
+
+    // case 'del'
     default:
       return state;
   }
