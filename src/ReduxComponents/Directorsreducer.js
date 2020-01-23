@@ -12,12 +12,7 @@ export const reducer = (state = initialState, action) => {
         directors: action.json
       };
     }
-
-    case "delData": {
-      // return {
-      //   directors: action.json
-      // };
-    }
+    
 
     // case 'del'
     default:

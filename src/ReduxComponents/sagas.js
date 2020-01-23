@@ -2,6 +2,7 @@ import { put,takeLatest, all,fork } from "redux-saga/effects";
 
 
 function* getAllDirectors() {
+  console.log('dfg')
   const url = "http://localhost:8080/directors";
 
   const json = yield fetch(url, {

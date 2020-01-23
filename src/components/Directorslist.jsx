@@ -19,12 +19,9 @@ class Directorslist extends Component {
 deleteDirectors = e => {
   e.preventDefault();
   const id = parseInt(e.target.parentNode.parentNode.id);
-  // console.log('here')
   this.props.deleteDirector(id);
+  this.props.refresh()
 };
-
-
-
 
   render() {
     return (

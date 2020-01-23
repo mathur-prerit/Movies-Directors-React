@@ -10,7 +10,7 @@ import { getAllDirectors,deleteDirector } from "../ReduxComponents/Directorsacti
 class Directors extends Component {
   //   state = {};
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getAllDirectors();
   }
 
@@ -22,7 +22,7 @@ class Directors extends Component {
       <div>
         <Header />
         <Adddirectorsbutton />
-        <Directorslist directors={directors} />
+        <Directorslist directors={directors} refresh={this.props.getAllDirectors}/>
       </div>
     );
   }
