@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require('path')
 
 const {
   allDirectors,
@@ -35,6 +36,14 @@ app.use(express.json());
 // //  Default index
 // app.get('/', (req, res) => res.send('Welcome to home page'));
 
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 //  directors route
 app.get("/directors", allDirectors);
 app.get("/directors/:directorid", directorByID);
@@ -49,8 +58,8 @@ app.delete("/movies/:movieid", deleteMovie);
 app.post("/movies/add", addMovie);
 app.put("/movies/:movieid/edit", updateMovie);
 
-// // Error URL
-// app.get('*', (req, res) => res.status(200).send('You ended up on wrong URL'));
+// Error URL
+app.get('*', (req, res) => res.status(200).send('You ended up on wrong URL'));
 
 //  Listening port
 app.listen(port);
